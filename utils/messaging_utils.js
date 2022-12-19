@@ -45,6 +45,33 @@ const handleMessage = (sender_psid, received_message) => {
         received_message.attachments.forEach(item =>{
             attachment_urls.push(item.payload.url)
         })
+
+        //to respond with a structured message
+        response = {
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": [{
+                  "title": "Is this the right picture?",
+                  "subtitle": "Tap a button to answer.",
+                  "image_url": attachment_urls.length <= 0 ? '' : attachment_urls[0],
+                  "buttons": [
+                    {
+                      "type": "postback",
+                      "title": "Yes!",
+                      "payload": "yes",
+                    },
+                    {
+                      "type": "postback",
+                      "title": "No!",
+                      "payload": "no",
+                    }
+                  ],
+                }]
+              }
+            }
+          }
     }
 
       // Sends the response message
@@ -53,7 +80,22 @@ const handleMessage = (sender_psid, received_message) => {
 
 // Handles messaging_postbacks events
 const handlePostback = (sender_psid, received_postback) => {
-    
+    let response
+
+    let postback_payload = received_postback.payload
+
+    if (postback_payload === 'yes') {
+        response = {
+            "text" : "thanks for responding the right way"
+        }
+    }
+    else if (postback_payload === "no") {
+        response = {
+            "text": "bad response bro, try again later"
+        }
+    }
+
+    callSendAPI(sender_psid, response)
 }
 
 
