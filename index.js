@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const webhookRoutes = require('./src/routes/webhook-routes')
+const otherRoutes = require('./src/routes/other-routes')
 
 
 const app = express()
@@ -8,12 +9,18 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+app.use(express.static('./src/public'))
+app.set('view engine','ejs')
+app.set('views','./src/views')
+
+
 app.get('/',(_req, res)=>{
-    res.send('welcome to our page')
+    res.render('homepage.ejs')
 })
 
 //webhook routes
 app.use('/webhook',webhookRoutes)
+app.use('/profile',otherRoutes)
 
 
 const PORT = process.env.PORT || 8080

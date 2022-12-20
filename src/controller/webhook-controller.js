@@ -15,7 +15,6 @@ const getWebhook = (req, res) => {
     
       if (mode === 'subscribe' && token === VERIFY_TOKEN) {
         
-        console.log('WEBHOOK_VERIFIED');
         res.status(200).send(challenge);
       
       } else {
@@ -62,11 +61,9 @@ const postWebhook = (req, res) => {
       body.entry.forEach(function(entry) {
   
         let webhook_event = entry.messaging[0];
-        console.log(webhook_event);
 
         //get the sender psid - page scoped id
         let sender_psid = webhook_event.sender.id
-        console.log('Sender PSID: '+sender_psid)
         
         if (webhook_event.message) {
           handleMessage(sender_psid, webhook_event.message)
