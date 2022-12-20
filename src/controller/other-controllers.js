@@ -50,9 +50,10 @@ const setUpFBprofile = (_req, res) => {
         json: data
     }, (err, res, body)=>{
         if(!err){
-            return res.status(200).json({
-                message: "successful"
-            })
+            console.log(res)
+            // return res.status(200).json({
+            //     message: "successful"
+            // })
         } else {
             return res.status(500).json({
                 message: "server error occurred"
@@ -60,9 +61,9 @@ const setUpFBprofile = (_req, res) => {
         }
     })
 
-    return res.json({
-        message: "ok"
-    })
+    // return res.json({
+    //     message: "ok"
+    // })
 }
 
 module.exports = {

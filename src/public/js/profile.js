@@ -13,6 +13,11 @@ submitButton.addEventListener('click', (e)=>{
         body: JSON.stringify({})
     })
     .then(res => res.json())
-    .then(res => console.log(res))
+    .then(res => {
+        // if(res.message === "successful") {
+
+        // }
+        return console.log(res)
+    })
     .catch(err => console.log(err))
 })
