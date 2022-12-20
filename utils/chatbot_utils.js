@@ -28,6 +28,5 @@ const getFaceBookUserData = (sender_psid) => {
 // }
 
 module.exports = {
-    getFaceBookUserData,
-    welcomeCustomer
+    getFaceBookUserData
 }
