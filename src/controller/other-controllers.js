@@ -50,9 +50,9 @@ const setUpFBprofile = (_req, res) => {
         json: data
     }, (err, res, body)=>{
         if(!err){
-            console.log(res.statusCode())
+            console.log(res.statusCode)
         } else {
-            console.log(res.statusCode())
+            console.log(res.statusCode)
             console.error("Unable to send ")
         }
     })
