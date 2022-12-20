@@ -43,23 +43,33 @@ const setUpFBprofile = (_req, res) => {
           
     }
 
-    request({
-        uri,
-        qs: {"access_token":process.env.PAGE_ACCESS_TOKEN},
-        method: "POST",
-        json: data
-    }, (err, res, body)=>{
-        if(!err){
-            console.log(res.statusCode)
-        } else {
-            console.log(res.statusCode)
-            console.error("Unable to send ")
-        }
-    })
+    try{
+        request({
+            uri,
+            qs: {"access_token":process.env.PAGE_ACCESS_TOKEN},
+            method: "POST",
+            json: data
+        }, (err, res, body)=>{
+            if(!err){
+                console.log(res.statusCode)
+            } else {
+                console.log(res.statusCode)
+                throw new Error(err)
+            }
+        })
 
-    return res.json({
-        message: "ok"
-    })
+        return res.status(200).json({
+            message: "ok"
+        })
+    }
+    catch(e) {
+        console.log(e)
+        return res.status(500).json({
+            message: e
+        })
+    }
+
+
 }
 
 module.exports = {

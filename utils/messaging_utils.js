@@ -1,4 +1,5 @@
 const request = require('request')
+const { getFaceBookUserData } = require('./chatbot_utils')
 
 //psid - page scoped id
 
@@ -78,8 +79,9 @@ const handleMessage = (sender_psid, received_message) => {
     callSendAPI(sender_psid, response);    
 }
 
+
 // Handles messaging_postbacks events
-const handlePostback = (sender_psid, received_postback) => {
+const handlePostback = async (sender_psid, received_postback) => {
     let response
 
     let postback_payload = received_postback.payload
@@ -95,8 +97,9 @@ const handlePostback = (sender_psid, received_postback) => {
         }
     }
     else if (postback_payload === "GET_STARTED") {
+      const userData = await getFaceBookUserData(sender_psid)
       response = {
-        "text": "Welecome User to Restaurant Chat Bot Testing"
+        "text": `Welecome ${userData} to Restaurant Chat Bot Testing`
       }
     }
 
