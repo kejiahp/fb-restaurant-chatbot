@@ -14,9 +14,7 @@ submitButton.addEventListener('click', (e)=>{
     })
     .then(res => res.json())
     .then(res => {
-        // if(res.message === "successful") {
-
-        // }
+        alert('profile successfully set')
         return console.log(res)
     })
     .catch(err => console.log(err))

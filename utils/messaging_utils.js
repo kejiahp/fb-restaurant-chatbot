@@ -94,6 +94,11 @@ const handlePostback = (sender_psid, received_postback) => {
             "text": "bad response bro, try again later"
         }
     }
+    else if (postback_payload === "GET_STARTED") {
+      response = {
+        "text": "Welecome User to Restaurant Chat Bot Testing"
+      }
+    }
 
     callSendAPI(sender_psid, response)
 }
